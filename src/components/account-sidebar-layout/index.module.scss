@@ -1,0 +1,20 @@
+@import '/src/global-style/index.module.scss';
+
+.main_wrapperr {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  min-height: 100vh;
+}
+
+.Layout {
+  nav {
+    position: relative;
+  }
+
+  @include mq('fluid-out') {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+  }
+}

@@ -1,0 +1,15 @@
+@import '/src/global-style/index.module.scss';
+
+.fof_wrapper {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    color: $green;
+    cursor: pointer;
+  }
+}

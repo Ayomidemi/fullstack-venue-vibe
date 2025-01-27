@@ -1,0 +1,58 @@
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000099;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal_content {
+  border-radius: 10px;
+  max-height: 90vh;
+  min-width: 450px;
+  overflow: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0;
+  padding: 0.3rem;
+  outline: none;
+  background-color: #f4f4f8;
+  color: #1a202c;
+
+  @media (max-width: 500px) {
+    width: 90%;
+    min-width: auto;
+  }
+}
+
+.max_modal_content {
+  width: 600px;
+
+  @media (max-width: 760px) {
+    width: 80%;
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
+}
+
+/* Define fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply fade-in animation to modal content */
+.fade_in {
+  animation: fadeIn 0.2s ease-in forwards;
+}

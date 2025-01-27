@@ -1,0 +1,57 @@
+@import '/src/global-style/index.module.scss';
+
+.navbar_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+
+  .notifi_bell {
+    position: relative;
+    cursor: pointer;
+    margin-right: 35px;
+
+    .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background-color: #f23232;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      border-radius: 50%;
+      min-width: 14px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+    }
+  }
+
+  .router_wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .profile_avatar {
+    background-color: rgba(51, 213, 186, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 47px;
+    width: 47px;
+    border-radius: 47px;
+    padding: 3px;
+    margin-right: 12px;
+
+    p {
+      color: rgba(0, 0, 0, 0.4);
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 42px;
+    }
+  }
+}

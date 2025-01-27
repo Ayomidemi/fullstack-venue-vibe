@@ -1,0 +1,281 @@
+@import '/src/global-style/index.module.scss';
+
+@mixin item {
+  align-items: center;
+  color: #686c73 !important;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  padding: 5px 20px;
+  margin: 5px auto;
+  font-family: $raleway;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+
+  & > div:first-child {
+    font-size: 22px;
+    font-weight: 500;
+    color: #686c73 !important;
+    // transform: translateY(-4px);
+  }
+
+  .iconWrapper {
+    width: 50px;
+  }
+
+  &.active {
+    color: $green !important;
+    background: linear-gradient(270deg, rgba(51, 213, 186, 0.15) 0%, rgba(51, 213, 186, 0) 100%);
+    & > div:first-child {
+      color: $green !important;
+    }
+  }
+
+  p {
+    text-align: start;
+    text-transform: capitalize;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  z-index: 48;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}
+
+.sidebar {
+  display: block;
+  background-color: #fff;
+  position: fixed;
+  font-family: 'Raleway';
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 270px;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+  overflow-y: scroll;
+
+  scrollbar-width: none !important;
+  scrollbar-color: #0000001a transparent;
+
+  /* Track */
+  &::-webkit-scrollbar {
+    width: 0px; /* width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #0000001a; /* color of the scrollbar handle */
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555; /* color of the scrollbar handle on hover */
+  }
+
+  &.hasShadow {
+    box-shadow: none;
+
+    @include mq('fluid-out') {
+      box-shadow: 6px 2px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.open {
+    transform: translateX(0%);
+  }
+
+  @include mq('fluid-out') {
+    transform: translateX(0%);
+  }
+
+  .content {
+    position: relative;
+    .logo {
+      position: relative;
+      margin: 30px auto;
+      margin-left: -30px;
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+
+    .user {
+      margin: 10px auto 30px;
+      text-align: center;
+
+      h3 {
+        margin: 10px auto 5px;
+        text-transform: capitalize;
+        color: #2a2d34;
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+
+    .links {
+      list-style-type: none;
+      width: auto;
+      padding-inline-start: 0;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+      font-family: 'Raleway';
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #a0e9dd;
+        border-radius: 2px;
+        border: 2px solid #fff;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: $green;
+      }
+
+      .item {
+        @include item();
+      }
+    }
+
+    .dropDown {
+      background-color: transparent;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 40px minmax(114px, 1fr) 10px;
+      align-items: center;
+      color: #686c73 !important;
+      font-size: 16px;
+      line-height: 18px;
+      padding: 16px 30px;
+
+      & > svg {
+        transform: translateY(-8px);
+      }
+
+      & > div:last-child {
+        color: #686c73 !important;
+        transform: rotate(0);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      &.open {
+        & > div:last-child {
+          transform: rotate(180deg);
+          color: $green !important;
+        }
+      }
+
+      &.active {
+        & > div:last-child {
+          color: $green !important;
+        }
+      }
+
+      p {
+        text-align: start;
+      }
+    }
+
+    .panel {
+      max-height: 0px;
+      background-color: #f7fdfc;
+      transition: max-height 0.2s ease-in-out;
+      overflow: hidden;
+
+      &.open {
+        max-height: 300px;
+      }
+
+      .list {
+        list-style-type: none;
+        padding: 10px 0;
+        border-top: 4px solid #fff;
+
+        .item {
+          @include item;
+          grid-template-columns: 30px 1fr;
+          padding: 12px 38px;
+          font-size: 13px;
+          gap: 0px;
+          text-transform: unset;
+
+          & > div:first-child {
+            font-size: 15px;
+            color: #686c73 !important;
+            transform: translateY(-4px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.toggler {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+  outline: none;
+  padding: 6px;
+  height: 40px;
+  width: 40px;
+  background: transparent;
+  text-align: center;
+  color: $black;
+  font-size: 25px;
+  cursor: pointer;
+  width: fit-content;
+
+  @include flex-center($direction: column);
+  gap: 5px;
+
+  &.white {
+    color: #fff !important;
+  }
+  @include mq('fluid-out') {
+    display: none;
+  }
+  &.open {
+    display: none;
+  }
+
+  & > div {
+    height: 3px;
+    width: 25px;
+    border-radius: 2px;
+    background-color: '#fff';
+  }
+}
+
+.hide {
+  display: none;
+}

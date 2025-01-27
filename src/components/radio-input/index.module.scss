@@ -1,0 +1,81 @@
+@import '/src/global-style/index.module.scss';
+
+.wrapper {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  gap: 40px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Neutral-Gray-200, #ebebeb);
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &.selected,
+  &:hover {
+    border-radius: 8px;
+    border: 1px solid var(--Green-green, #33d5ba);
+  }
+
+  &.disabled {
+    opacity: 0.5; /* Visual cue for disabled state */
+    cursor: not-allowed;
+  }
+
+  .textSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+    flex: 1 0 0;
+
+    h4 {
+      all: unset;
+      color: var(--Neutral-Black, #303030);
+
+      /* Body/Medium text - heavy */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px; /* 157.143% */
+
+      @include tablet {
+        color: var(--Neutral-Black, #303030);
+        font-variant-numeric: lining-nums proportional-nums;
+
+        /* Heading/Heading 6 */
+        font-family: Raleway;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22px; /* 137.5% */
+      }
+    }
+
+    p {
+      all: unset;
+      color: var(--Neutral-Gray-500, #666);
+
+      /* Body/Small text - regular */
+      font-family: Raleway;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 150% */
+
+      @include tablet {
+        color: var(--Neutral-Gray-500, #666);
+        font-variant-numeric: lining-nums proportional-nums;
+
+        /* To change - Don't use/Small text - regular */
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px; /* 150% */
+      }
+    }
+  }
+}

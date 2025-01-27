@@ -1,0 +1,19 @@
+@import '/src/global-style/index.module.scss';
+
+.header_container {
+  .header_label {
+    font-size: 18px;
+    line-height: 21px;
+    color: '$black';
+    text-align: center;
+    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    margin-top: 5px;
+
+    @media (min-width: 768px) {
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+}

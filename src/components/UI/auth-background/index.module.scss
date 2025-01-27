@@ -1,0 +1,23 @@
+@import '/src/global-style/index.module.scss';
+
+.auth_background {
+  min-height: 100vh;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease-in-out;
+}
+
+.overlay {
+  background-color: $overlay;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
+}
