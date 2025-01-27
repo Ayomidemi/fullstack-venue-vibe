@@ -13,11 +13,6 @@ const Dashboard = () => {
   const profile = session?.user;
   const { fetchProfile } = useAccountActions();
 
-  const generateName = () => {
-    const generatedName = profile?.profile?.firstName || 'User';
-    return capitaliseText(generatedName + '!');
-  };
-
   useEffect(() => {
     fetchProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,7 +20,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard_wrapper}>
-      <h1 className={styles.profile_name}>Hi, {generateName()}</h1>
+      <h1 className={styles.profile_name}>Eventsssssss</h1>
     </div>
   );
 };

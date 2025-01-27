@@ -27,7 +27,7 @@
 
   &.active {
     color: $green !important;
-    background: linear-gradient(270deg, rgba(51, 213, 186, 0.15) 0%, rgba(51, 213, 186, 0) 100%);
+    background: linear-gradient(270deg, rgba(51, 143, 213, 0.15) 0%, rgba(51, 113, 213, 0) 100%);
     & > div:first-child {
       color: $green !important;
     }
@@ -151,7 +151,7 @@
 
       /* Handle */
       &::-webkit-scrollbar-thumb {
-        background: #a0e9dd;
+        background: #a0cce9;
         border-radius: 2px;
         border: 2px solid #fff;
       }

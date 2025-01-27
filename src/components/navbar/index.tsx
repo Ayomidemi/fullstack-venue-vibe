@@ -24,14 +24,10 @@ const NavBar = () => {
 
       <div onClick={() => router.push('/settings')} className={styles.router_wrapper}>
         <div className={styles.profile_avatar}>
-          <p>{profile?.username ? profile?.username[0] : ''}</p>
+          <p>{profile?.username[0] || 'U'}</p>
         </div>
 
-        <p>
-          {profile?.profile?.firstName
-            ? `${profile?.profile?.firstName} ${profile?.profile?.lastName[0] || ''}.`
-            : profile?.username || ''}
-        </p>
+        <p>{profile?.profile?.firstName || 'User'}</p>
       </div>
     </div>
   );

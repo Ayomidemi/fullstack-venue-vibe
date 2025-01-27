@@ -11,21 +11,15 @@ import Header from '@/components/UI/header';
 import { ErrorMessage, ErrorMessageWithIcon } from '@/components/UI/error-text';
 import Input from '@/components/input-field';
 import Button from '@/components/button';
-import { unhashString } from '@/utils/unhash-string';
-import Dropdown from '@/components/select-field';
+// import Dropdown from '@/components/select-field';
 import { useAccountActions } from '@/actions/my-account';
-import { Country } from '@/enums';
-import { FALLBACK_COUNTRIES } from '@/constants';
-import { useHelpDeskConcealer } from '@/hooks';
 import PhoneInput from '@/components/phone-input-filed';
 import toast from 'react-hot-toast';
 
 const SignUp = () => {
-  const emailFromUrl = useSearchParams().get('email');
   const referralCode = useSearchParams().get('referralCode');
 
-  const { getAvailableCountries, resendVerificationMail, signUp } = useAccountActions();
-  const { concealHelpDesk } = useHelpDeskConcealer();
+  const { resendVerificationMail, signUp } = useAccountActions();
 
   const [showVerificationScreen, setShowVerificationScreen] = useState(false);
   const [error, setError] = useState({
@@ -42,10 +36,7 @@ const SignUp = () => {
     error: null,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any);
-  const [fetching, setFetching] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [countries, setCountries] = useState<Country[]>(FALLBACK_COUNTRIES);
-  const [prefixes, setPrefixes] = useState<Country>(FALLBACK_COUNTRIES[0]);
 
   const [details, setDetails] = useState({
     username: '',
@@ -65,27 +56,6 @@ const SignUp = () => {
     }
 
     return err;
-  };
-
-  const getListOfCountries = async () => {
-    setFetching(true);
-
-    const data = await getAvailableCountries();
-
-    if (Array.isArray(data)) {
-      const mappedCountries: Country[] = data.map((value) => {
-        return {
-          name: value?.name,
-          code: value?.code,
-          code3: value?.currencyCode,
-          prefix: value?.phoneCode,
-        };
-      });
-
-      setCountries(mappedCountries);
-    }
-
-    setFetching(false);
   };
 
   const handleInputChange = (e: { name: string; value: string }) => {
@@ -121,14 +91,11 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      const { confirmPassword, username, phoneNumber, defaultCurrency, country, ...rest } = details;
+      const { ...rest } = details;
       const payload = {
         ...rest,
         username: details.username.toLowerCase(),
         confirmPassword: details.password,
-        phoneNumber: `${prefixes?.prefix}${details.phoneNumber}`,
-        defaultCurrency: String(prefixes?.code3),
-        country: String(prefixes?.code),
       };
 
       const response = await signUp(payload);
@@ -177,28 +144,12 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    concealHelpDesk();
-    getListOfCountries();
-  }, []);
-
-  useEffect(() => {
-    if (emailFromUrl) {
-      setDetails({ ...details, email: unhashString(String(emailFromUrl)) });
-    }
-
     if (referralCode) {
       setDetails({ ...details, referredBy: String(referralCode) });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [emailFromUrl, referralCode]);
-
-  useEffect(() => {
-    if (details?.country) {
-      const countryCode = countries.find((val) => val.name === details?.country);
-      setPrefixes(countryCode as Country);
-    }
-  }, [details?.country]);
+  }, [referralCode]);
 
   return (
     <AuthBackGround>
@@ -242,31 +193,13 @@ const SignUp = () => {
                 </div>
 
                 <div className={styles.input_container}>
-                  <Dropdown
-                    onSelect={(value: string) => {
-                      setError((err) => ({
-                        ...err,
-                        country: '',
-                      }));
-                      setDetails({ ...details, country: value });
-                    }}
-                    name="country"
-                    defaultValue={details.country}
-                    label="Country"
-                    helperText={error.country && error.country}
-                    hideSearch={true}
-                    options={countries.map((val) => val?.name)}
-                  />
-                </div>
-
-                <div className={styles.input_container}>
                   <PhoneInput
                     onChange={handleInputChange}
                     name="phoneNumber"
                     defaultValue={details.phoneNumber}
                     label="Phone Number"
                     helperText={error.phoneNumber && error.phoneNumber}
-                    code={prefixes?.prefix}
+                    code={'NGN'}
                   />
                 </div>
 

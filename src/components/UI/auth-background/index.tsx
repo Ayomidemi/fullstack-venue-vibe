@@ -11,7 +11,7 @@ interface AuthBackGroundProps {
 
 const images = () => ({
   mobile_bg: {
-    uri: 'https://res.cloudinary.com/easyshare-africa/image/upload/c_scale,h_480,q_100,w_350/v1641944904/easyshare-assets/auth2Bg_jd9mzr.png',
+    uri: 'https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=800',
     width: 375,
     height: 812,
   },

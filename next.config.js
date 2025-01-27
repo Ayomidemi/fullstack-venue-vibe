@@ -16,6 +16,7 @@ module.exports = withPWA({
     config.resolve.alias["@utils"] = "./src/utils";
     config.resolve.alias["@global-style"] = "./src/global-style";
     config.resolve.alias["@actions"] = "./src/actions";
+    config.resolve.alias["@assets"] = "./src/assets";
     config.externals.push({ canvas: "commonjs canvas" });
     return config;
   },
