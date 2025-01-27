@@ -9,28 +9,25 @@ interface AuthBackGroundProps {
   paddingTop?: number;
 }
 
-const images = (type = 1) => ({
+const images = () => ({
   mobile_bg: {
-    uri:
-      type === 1
-        ? 'https://res.cloudinary.com/easyshare-africa/image/upload/v1648481548/easyshare-assets/auth-blur-bg-mobile_hjcgdg.png'
-        : 'https://res.cloudinary.com/easyshare-africa/image/upload/c_scale,h_480,q_100,w_350/v1641944904/easyshare-assets/auth2Bg_jd9mzr.png',
+    uri: 'https://res.cloudinary.com/easyshare-africa/image/upload/c_scale,h_480,q_100,w_350/v1641944904/easyshare-assets/auth2Bg_jd9mzr.png',
     width: 375,
     height: 812,
   },
   large_bg: {
-    uri: 'https://res.cloudinary.com/easyshare-africa/image/upload/v1648481411/easyshare-assets/auth-blur-bg_xyasgj.png',
+    uri: 'https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=800',
     width: 1440,
     height: 1024,
   },
 });
 
 const AuthBackGround = ({ children, type = 1, paddingTop = 0 }: AuthBackGroundProps) => {
-  const [bg, setBg] = useState(images(type).mobile_bg);
+  const [bg, setBg] = useState(images().mobile_bg);
 
   useEffect(() => {
     const handleResize = () => {
-      setBg(window.innerWidth < 768 ? images(type).mobile_bg : images(type).large_bg);
+      setBg(window.innerWidth < 768 ? images().mobile_bg : images().large_bg);
     };
 
     handleResize();

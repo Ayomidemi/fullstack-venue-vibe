@@ -1,0 +1,225 @@
+@import './variables';
+
+@mixin flex-center($direction: row, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-btw($direction: row, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-even($direction: row, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: $wrap;
+}
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    // @if $type == max {
+    //     $width: $width - 1px;
+    // }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin menu-style {
+  position: absolute;
+  width: 100%;
+  box-shadow: $menu-shadow;
+  //padding: 10px 0;
+  z-index: 50;
+  background: #fff;
+  margin-top: 25px;
+  border-radius: 6px;
+  transform-origin: top;
+  z-index: 6;
+  float: left;
+  li {
+    padding: 10px 12px;
+    list-style: none;
+    .flag {
+      margin: 0;
+    }
+  }
+}
+
+@mixin styledScrollbar {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #d9e7ff;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #7a869a;
+    border-radius: 1rem;
+  }
+}
+
+@mixin affiliatePageTemplate {
+  position: relative;
+  background: #fff url('../../images/bg-mobile.png') no-repeat;
+  min-height: 100vh;
+  @include flex-center;
+
+  @include mq('phone-small') {
+    background-size: unset;
+  }
+
+  @include mq('tablet', 'min') {
+    background: url('../../images/bg.png') center top/cover;
+  }
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: $overlay;
+  }
+}
+
+@mixin title {
+  font-family: Raleway;
+  font-size: 32px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #303030;
+  @include mq('phone-wide') {
+    font-size: 25px;
+  }
+}
+
+@mixin bannerButtons(
+  $bgColor: $green,
+  $color: $white-bg-banner,
+  $width: 200px
+) {
+  width: $width;
+  background-color: $bgColor;
+  height: 54px;
+  border: 2px solid $green;
+  border-radius: 4px;
+  color: $color;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  @include flex-center();
+}
+
+@mixin link {
+  text-decoration: none;
+  display: inline-block;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+  color: $green;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.04);
+  }
+}
+
+@mixin tooltip {
+  padding: 3px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  @include flex-btw;
+
+  &#success i,
+  &#success span {
+    color: $green;
+  }
+
+  i {
+    color: rgba(250, 1, 1, 0.884);
+  }
+  span {
+    color: rgba(250, 1, 1, 0.884);
+    border-radius: 6px;
+    margin-left: 12px;
+    line-height: 17px;
+    z-index: 1;
+    transform-origin: top;
+    transform: translateZ(10ch) rotateY(20deg);
+    transition: all 0.2s ease-in;
+    box-shadow: none;
+    padding: 5px;
+    cursor: default;
+  }
+  i:hover + span {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateZ(-10ch);
+  }
+}
+
+@mixin passwordStrength {
+  @include flex-btw;
+  margin-bottom: 15px;
+  progress {
+    width: 233px;
+    height: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    @include mq('phone-wide') {
+      margin-right: 10px;
+    }
+    &::-webkit-progress-bar {
+      background-color: $lighter-green;
+      border-radius: 7px;
+    }
+    &::-webkit-progress-value {
+      border-radius: 7px;
+      // background-size: 35px 20px, 100% 100%, 100% 100%;
+    }
+    &.weak::-webkit-progress-value {
+      background: $red;
+    }
+    &.fair::-webkit-progress-value {
+      background: yellow;
+    }
+    &.good::-webkit-progress-value {
+      background: orange;
+    }
+    &.strong::-webkit-progress-value {
+      background: $green;
+    }
+  }
+}
+
+@mixin label {
+  margin-bottom: 16px;
+  letter-spacing: 0.42px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  position: relative;
+}
+
+@mixin errror {
+  color: $red;
+  font-style: italic;
+}

@@ -1,0 +1,51 @@
+@import '/src/global-style/index.module.scss';
+
+@mixin flexx {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.referral_wrapper {
+  padding: 30px;
+  flex-direction: column;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #545454;
+  }
+
+  .referralOverview {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 24px;
+  }
+
+  .overviewCardList {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .usersAndTransactions {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+  }
+
+}
+
+

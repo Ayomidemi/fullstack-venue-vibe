@@ -8,10 +8,9 @@ import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import classNames from 'classnames';
 import { Icon } from './Icons';
-import { showWebHamburgerAtom, helpStatusAtom } from '@/state';
+import { showWebHamburgerAtom } from '@/state';
 import styles from './index.module.scss';
 import { logout } from '@/actions-server/auth';
-import { useHelpDeskConcealer } from '@/hooks/use-help-desk-concealer';
 import { Storage } from '@/utils/storage';
 
 const isWallet = (path: string) => /(send|receive|swap|buy|sell|wallet)/gi.test(path);
@@ -24,9 +23,6 @@ const hasToggler = (path: string) =>
 const hasShadow = () => true;
 
 const SideNav = ({ navbarColor }: { navbarColor?: boolean }) => {
-  const { concealHelpDesk, revealHelpDesk } = useHelpDeskConcealer();
-  const [loading, setLoading] = useState(false);
-  const helpStatus = useRecoilValue(helpStatusAtom);
   const showWebHamburger = useRecoilValue(showWebHamburgerAtom);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathname = usePathname();
@@ -40,28 +36,10 @@ const SideNav = ({ navbarColor }: { navbarColor?: boolean }) => {
     logout();
   };
 
-  const showHelpDesk = () => {
-    if (!helpStatus) {
-      setLoading(true);
-      return;
-    }
-    revealHelpDesk();
-    setLoading(false);
-    setIsNavOpen(false);
-  };
-
   useEffect(() => {
-    if (loading) showHelpDesk();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [helpStatus, loading]);
-
-  useEffect(() => {
-    concealHelpDesk();
-
     const resize = () => setIsNavOpen(false);
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -209,17 +187,6 @@ const SideNav = ({ navbarColor }: { navbarColor?: boolean }) => {
                 </div>
                 <p>Settings</p>
               </Link>
-            </li>
-
-            <li>
-              <a
-                className={classNames(styles.item, { [styles.active]: loading })}
-                onClick={showHelpDesk}>
-                <div className={styles.iconWrapper}>
-                  <Icon type="help" color="#686C73" />
-                </div>
-                <p>Help</p>
-              </a>
             </li>
 
             <li>

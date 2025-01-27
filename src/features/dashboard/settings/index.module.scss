@@ -1,0 +1,9 @@
+@import '/src/global-style/index.module.scss';
+
+@mixin flexx {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

@@ -1,5 +1,14 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
+
+import RecoilContextProvider from '@/providers/recoil-provider/recoil-provider';
+import SessionClient from '@/providers/session-client';
+import { ISession } from '@/interface';
+import { getSession } from '@/actions-server/auth';
+import styles from '@/global-style/index.module.scss';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const APP_NAME = 'Venue.Vibe';
 const APP_DEFAULT_TITLE = 'Venue.Vibe';
@@ -30,14 +39,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session: ISession = await getSession();
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${inter.className} ${styles.app}`} style={{ margin: 0 }}>
+        <RecoilContextProvider>
+          <SessionClient session={session}>{children}</SessionClient>
+          <Toaster />
+        </RecoilContextProvider>
+      </body>
     </html>
   );
 }

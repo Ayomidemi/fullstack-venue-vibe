@@ -1,9 +1,13 @@
+import React from 'react';
+
 import SignIn from '@/features/auth/login';
 
-export default function Home() {
+const SignInPage = () => {
   return (
     <div>
       <SignIn />
     </div>
   );
-}
+};
+
+export default SignInPage;
