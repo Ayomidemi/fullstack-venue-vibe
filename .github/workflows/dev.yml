@@ -15,7 +15,7 @@ jobs:
         run: |
           # Trigger the webhook and capture the HTTP status code
           STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" -X POST -d '{}' "$WEBHOOK_URL")
-          
+
           # Check if the request was successful (HTTP status code 200 or 201)
           if [ "$STATUS_CODE" -eq 200 ] || [ "$STATUS_CODE" -eq 201 ]; then
             echo "Webhook triggered successfully with status code $STATUS_CODE."
@@ -24,13 +24,13 @@ jobs:
             exit 1  # Stop the workflow on failure
           fi
 
-      - name: Post Slack Notification
-        if: success()
-        env:
-          ENVIRONMENT: Development
-          DEPLOYMENT_SLACK_WEBHOOK: ${{ secrets.VERCEL_SLACK_WEBHOOK }}
-        run: |
-          # Send notification to Slack with deployment details
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "Deployment to '${ENVIRONMENT}' has begun for easyshare-web! :rocket:"}' \
-          "$DEPLOYMENT_SLACK_WEBHOOK"
+      # - name: Post Slack Notification
+      #   if: success()
+      #   env:
+      #     ENVIRONMENT: Development
+      #     DEPLOYMENT_SLACK_WEBHOOK: ${{ secrets.VERCEL_SLACK_WEBHOOK }}
+      #   run: |
+      #     # Send notification to Slack with deployment details
+      #     curl -X POST -H 'Content-type: application/json' \
+      #     --data '{"text": "Deployment to '${ENVIRONMENT}' has begun for easyshare-web! :rocket:"}' \
+      #     "$DEPLOYMENT_SLACK_WEBHOOK"
